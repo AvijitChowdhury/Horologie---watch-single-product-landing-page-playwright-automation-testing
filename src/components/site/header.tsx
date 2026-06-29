@@ -16,7 +16,7 @@ export function SiteHeader() {
       <div className="mx-auto max-w-[1400px] flex items-center justify-between px-6 py-4">
         <Link to="/" className="font-display text-xl tracking-tight flex items-center gap-2">
           <span className="inline-block w-2 h-2 rounded-full bg-ember animate-pulse" />
-          ChronoCraft<span className="text-ember">™</span>
+          Horologie<span className="text-ember">™</span>
         </Link>
         <nav className="hidden md:flex items-center gap-8 font-mono text-[11px] uppercase tracking-[0.22em] text-cream/70">
           <a href="/#craft" className="hover:text-cream transition">Craft</a>

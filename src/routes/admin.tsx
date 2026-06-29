@@ -8,7 +8,7 @@ import { SiteFooter } from "@/components/site/footer";
 import { formatPrice } from "@/lib/format";
 
 export const Route = createFileRoute("/admin")({
-  head: () => ({ meta: [{ title: "Admin · ChronoCraft" }] }),
+  head: () => ({ meta: [{ title: "Admin · Horologie" }] }),
   component: AdminPage,
 });
 

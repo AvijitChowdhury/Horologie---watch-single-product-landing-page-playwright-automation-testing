@@ -7,7 +7,7 @@ import { SiteFooter } from "@/components/site/footer";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/auth")({
-  head: () => ({ meta: [{ title: "Sign in · ChronoCraft" }] }),
+  head: () => ({ meta: [{ title: "Sign in · Horologie" }] }),
   component: AuthPage,
 });
 
@@ -103,7 +103,7 @@ function AuthPage() {
 
         <div className="mt-6 text-center text-sm text-cream/60">
           {mode === "signin" ? (
-            <>New to ChronoCraft? <button className="text-ember underline-offset-4 hover:underline" onClick={() => setMode("signup")}>Create an account</button></>
+            <>New to Horologie? <button className="text-ember underline-offset-4 hover:underline" onClick={() => setMode("signup")}>Create an account</button></>
           ) : (
             <>Already have one? <button className="text-ember underline-offset-4 hover:underline" onClick={() => setMode("signin")}>Sign in</button></>
           )}

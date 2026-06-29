@@ -13,7 +13,7 @@ import { toast } from "sonner";
 const catalogQuery = queryOptions({ queryKey: ["catalog"], queryFn: () => getCatalog() });
 
 export const Route = createFileRoute("/checkout")({
-  head: () => ({ meta: [{ title: "Review & Checkout · ChronoCraft" }] }),
+  head: () => ({ meta: [{ title: "Review & Checkout · Horologie" }] }),
   loader: ({ context }) => context.queryClient.ensureQueryData(catalogQuery),
   component: CheckoutPage,
 });
