@@ -14,16 +14,430 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      case_finishes: {
+        Row: {
+          display_order: number
+          hex_code: string | null
+          id: string
+          image_url: string | null
+          is_active: boolean
+          name: string
+          price_modifier: number
+        }
+        Insert: {
+          display_order?: number
+          hex_code?: string | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          name: string
+          price_modifier?: number
+        }
+        Update: {
+          display_order?: number
+          hex_code?: string | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          name?: string
+          price_modifier?: number
+        }
+        Relationships: []
+      }
+      dial_colors: {
+        Row: {
+          display_order: number
+          hex_code: string | null
+          id: string
+          image_url: string | null
+          is_active: boolean
+          name: string
+          price_modifier: number
+        }
+        Insert: {
+          display_order?: number
+          hex_code?: string | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          name: string
+          price_modifier?: number
+        }
+        Update: {
+          display_order?: number
+          hex_code?: string | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          name?: string
+          price_modifier?: number
+        }
+        Relationships: []
+      }
+      faq: {
+        Row: {
+          answer: string
+          category: string
+          display_order: number
+          id: string
+          is_published: boolean
+          question: string
+        }
+        Insert: {
+          answer: string
+          category: string
+          display_order?: number
+          id?: string
+          is_published?: boolean
+          question: string
+        }
+        Update: {
+          answer?: string
+          category?: string
+          display_order?: number
+          id?: string
+          is_published?: boolean
+          question?: string
+        }
+        Relationships: []
+      }
+      order_configurations: {
+        Row: {
+          case_finish_id: string | null
+          dial_color_id: string | null
+          engraving_text: string | null
+          gift_packaging: boolean
+          id: string
+          order_id: string
+          product_id: string
+          snapshot_base_price: number
+          snapshot_total_modifiers: number
+          strap_id: string | null
+          warranty_id: string | null
+          watch_size_id: string | null
+        }
+        Insert: {
+          case_finish_id?: string | null
+          dial_color_id?: string | null
+          engraving_text?: string | null
+          gift_packaging?: boolean
+          id?: string
+          order_id: string
+          product_id: string
+          snapshot_base_price: number
+          snapshot_total_modifiers: number
+          strap_id?: string | null
+          warranty_id?: string | null
+          watch_size_id?: string | null
+        }
+        Update: {
+          case_finish_id?: string | null
+          dial_color_id?: string | null
+          engraving_text?: string | null
+          gift_packaging?: boolean
+          id?: string
+          order_id?: string
+          product_id?: string
+          snapshot_base_price?: number
+          snapshot_total_modifiers?: number
+          strap_id?: string | null
+          warranty_id?: string | null
+          watch_size_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "order_configurations_case_finish_id_fkey"
+            columns: ["case_finish_id"]
+            isOneToOne: false
+            referencedRelation: "case_finishes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "order_configurations_dial_color_id_fkey"
+            columns: ["dial_color_id"]
+            isOneToOne: false
+            referencedRelation: "dial_colors"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "order_configurations_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "order_configurations_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "order_configurations_strap_id_fkey"
+            columns: ["strap_id"]
+            isOneToOne: false
+            referencedRelation: "straps"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "order_configurations_warranty_id_fkey"
+            columns: ["warranty_id"]
+            isOneToOne: false
+            referencedRelation: "warranty_options"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "order_configurations_watch_size_id_fkey"
+            columns: ["watch_size_id"]
+            isOneToOne: false
+            referencedRelation: "watch_sizes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      orders: {
+        Row: {
+          created_at: string
+          customer_email: string
+          customer_id: string | null
+          customer_name: string
+          id: string
+          shipping_address: Json
+          status: Database["public"]["Enums"]["order_status"]
+          stripe_payment_id: string | null
+          total_price: number
+        }
+        Insert: {
+          created_at?: string
+          customer_email: string
+          customer_id?: string | null
+          customer_name: string
+          id?: string
+          shipping_address: Json
+          status?: Database["public"]["Enums"]["order_status"]
+          stripe_payment_id?: string | null
+          total_price: number
+        }
+        Update: {
+          created_at?: string
+          customer_email?: string
+          customer_id?: string | null
+          customer_name?: string
+          id?: string
+          shipping_address?: Json
+          status?: Database["public"]["Enums"]["order_status"]
+          stripe_payment_id?: string | null
+          total_price?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "orders_customer_id_fkey"
+            columns: ["customer_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      products: {
+        Row: {
+          base_price: number
+          description: string | null
+          hero_image_url: string | null
+          id: string
+          is_active: boolean
+          name: string
+        }
+        Insert: {
+          base_price: number
+          description?: string | null
+          hero_image_url?: string | null
+          id?: string
+          is_active?: boolean
+          name?: string
+        }
+        Update: {
+          base_price?: number
+          description?: string | null
+          hero_image_url?: string | null
+          id?: string
+          is_active?: boolean
+          name?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          email: string
+          first_name: string | null
+          id: string
+          last_name: string | null
+          role: Database["public"]["Enums"]["user_role"]
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          first_name?: string | null
+          id: string
+          last_name?: string | null
+          role?: Database["public"]["Enums"]["user_role"]
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          first_name?: string | null
+          id?: string
+          last_name?: string | null
+          role?: Database["public"]["Enums"]["user_role"]
+        }
+        Relationships: []
+      }
+      settings: {
+        Row: {
+          description: string | null
+          key: string
+          value: Json
+        }
+        Insert: {
+          description?: string | null
+          key: string
+          value: Json
+        }
+        Update: {
+          description?: string | null
+          key?: string
+          value?: Json
+        }
+        Relationships: []
+      }
+      straps: {
+        Row: {
+          display_order: number
+          id: string
+          image_url: string | null
+          is_active: boolean
+          name: string
+          price_modifier: number
+          swatch_color: string | null
+        }
+        Insert: {
+          display_order?: number
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          name: string
+          price_modifier?: number
+          swatch_color?: string | null
+        }
+        Update: {
+          display_order?: number
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          name?: string
+          price_modifier?: number
+          swatch_color?: string | null
+        }
+        Relationships: []
+      }
+      testimonials: {
+        Row: {
+          content: string
+          created_at: string
+          customer_name: string
+          id: string
+          image_url: string | null
+          is_published: boolean
+          is_verified: boolean
+          rating: number
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          customer_name: string
+          id?: string
+          image_url?: string | null
+          is_published?: boolean
+          is_verified?: boolean
+          rating: number
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          customer_name?: string
+          id?: string
+          image_url?: string | null
+          is_published?: boolean
+          is_verified?: boolean
+          rating?: number
+        }
+        Relationships: []
+      }
+      warranty_options: {
+        Row: {
+          display_order: number
+          id: string
+          is_active: boolean
+          name: string
+          price_modifier: number
+        }
+        Insert: {
+          display_order?: number
+          id?: string
+          is_active?: boolean
+          name: string
+          price_modifier?: number
+        }
+        Update: {
+          display_order?: number
+          id?: string
+          is_active?: boolean
+          name?: string
+          price_modifier?: number
+        }
+        Relationships: []
+      }
+      watch_sizes: {
+        Row: {
+          display_order: number
+          id: string
+          is_active: boolean
+          price_modifier: number
+          size: string
+        }
+        Insert: {
+          display_order?: number
+          id?: string
+          is_active?: boolean
+          price_modifier?: number
+          size: string
+        }
+        Update: {
+          display_order?: number
+          id?: string
+          is_active?: boolean
+          price_modifier?: number
+          size?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_admin: { Args: never; Returns: boolean }
     }
     Enums: {
-      [_ in never]: never
+      order_status:
+        | "pending"
+        | "processing"
+        | "shipped"
+        | "delivered"
+        | "cancelled"
+      user_role: "customer" | "admin"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +564,15 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      order_status: [
+        "pending",
+        "processing",
+        "shipped",
+        "delivered",
+        "cancelled",
+      ],
+      user_role: ["customer", "admin"],
+    },
   },
 } as const
