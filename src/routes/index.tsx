@@ -8,6 +8,7 @@ import { Marquee } from "@/components/site/marquee";
 import { Configurator } from "@/components/site/configurator";
 import { formatPrice } from "@/lib/format";
 import craftMovement from "@/assets/craft-movement.jpg";
+import watchSilver from "@/assets/watch-silver.jpg";
 
 const catalogQuery = queryOptions({
   queryKey: ["catalog"],
@@ -110,14 +111,13 @@ function Hero({ basePrice }: { basePrice: number }) {
             transition={{ duration: 0.6, delay: 0.6 }}
             className="mt-10 flex items-center gap-6"
           >
-            <Link
-              to="/"
-              hash="configure"
+            <a
+              href="#configure"
               className="group bg-ember text-ink font-mono text-sm uppercase tracking-[0.25em] px-7 py-4 hover:bg-cream transition-colors flex items-center gap-3"
             >
               Configure now
               <span className="group-hover:translate-x-2 transition">→</span>
-            </Link>
+            </a>
             <div>
               <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-cream/40">From</div>
               <div className="font-display text-2xl">{formatPrice(basePrice)}</div>
@@ -133,7 +133,7 @@ function Hero({ basePrice }: { basePrice: number }) {
             className="ember-glow"
           >
             <img
-              src="/src/assets/watch-silver.jpg"
+              src={watchSilver}
               alt="ChronoCraft watch"
               width={1280}
               height={1280}
@@ -271,13 +271,12 @@ function Cta() {
       <h2 className="font-display text-[clamp(3rem,10vw,10rem)] leading-[0.9] mt-4">
         <em className="italic text-ember">Yours.</em><br />Made for one.
       </h2>
-      <Link
-        to="/"
-        hash="configure"
+      <a
+        href="#configure"
         className="inline-flex items-center gap-3 mt-10 bg-cream text-ink font-mono text-sm uppercase tracking-[0.25em] px-8 py-5 hover:bg-ember transition-colors"
       >
         Configure your ChronoCraft →
-      </Link>
+      </a>
     </section>
   );
 }
