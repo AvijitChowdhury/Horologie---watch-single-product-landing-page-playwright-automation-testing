@@ -92,10 +92,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "ChronoCraft — Custom Luxury Watches, Hand-Assembled" },
       { name: "description", content: "Design your own ChronoCraft timepiece. Swiss movement, sapphire glass, and 25 characters of engraving — configured live, made to order." },
       { name: "author", content: "ChronoCraft" },
-      { property: "og:title", content: "ChronoCraft — Custom Luxury Watches" },
-      { property: "og:description", content: "Configure your own ChronoCraft. Swiss movement. Sapphire glass. Hand-assembled to order." },
+      { property: "og:title", content: "ChronoCraft — Custom Luxury Watches, Hand-Assembled" },
+      { property: "og:description", content: "Design your own ChronoCraft timepiece. Swiss movement, sapphire glass, and 25 characters of engraving — configured live, made to order." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "ChronoCraft — Custom Luxury Watches, Hand-Assembled" },
+      { name: "twitter:description", content: "Design your own ChronoCraft timepiece. Swiss movement, sapphire glass, and 25 characters of engraving — configured live, made to order." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/7cf4b117-a30e-40e3-9840-7c73a968c733" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/7cf4b117-a30e-40e3-9840-7c73a968c733" },
     ],
     links: [
       {
