@@ -35,6 +35,6 @@ export const useConfigurator = create<ConfiguratorState>()(
           giftPackaging: false,
         }),
     }),
-    { name: "chronocraft-config" },
+    { name: "horologie-config" },
   ),
 );
