@@ -24,7 +24,7 @@ export type CatalogPayload = {
   warranty_options: Array<{ id: string; name: string; price_modifier: number; display_order: number }>;
   testimonials: Array<{ id: string; customer_name: string; content: string; rating: number; image_url: string | null }>;
   faq: Array<{ id: string; category: string; question: string; answer: string; display_order: number }>;
-  settings: Record<string, unknown>;
+  settings: Record<string, string | number>;
 };
 
 export const getCatalog = createServerFn({ method: "GET" }).handler(async (): Promise<CatalogPayload> => {
@@ -43,8 +43,11 @@ export const getCatalog = createServerFn({ method: "GET" }).handler(async (): Pr
 
   if (!product.data) throw new Error("No active product configured");
 
-  const settingsMap: Record<string, unknown> = {};
-  for (const row of settings.data ?? []) settingsMap[row.key] = row.value;
+  const settingsMap: Record<string, string | number> = {};
+  for (const row of settings.data ?? []) {
+    const v = row.value as unknown;
+    settingsMap[row.key] = typeof v === "number" ? v : Number(v) || String(v);
+  }
 
   return {
     product: {
