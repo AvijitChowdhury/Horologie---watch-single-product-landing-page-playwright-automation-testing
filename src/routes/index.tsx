@@ -18,9 +18,9 @@ const catalogQuery = queryOptions({
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "ChronoCraft — Design Your Own Luxury Watch" },
-      { name: "description", content: "Configure a one-of-a-kind ChronoCraft timepiece. Swiss movement, sapphire glass, 25 characters of engraving — yours, made to order." },
-      { property: "og:title", content: "ChronoCraft — Design Your Own Luxury Watch" },
+      { title: "Horologie — Design Your Own Luxury Watch" },
+      { name: "description", content: "Configure a one-of-a-kind Horologie timepiece. Swiss movement, sapphire glass, 25 characters of engraving — yours, made to order." },
+      { property: "og:title", content: "Horologie — Design Your Own Luxury Watch" },
       { property: "og:description", content: "Hand-assembled Swiss movement. Live configurator. Made to order in 7–10 days." },
     ],
   }),
@@ -134,7 +134,7 @@ function Hero({ basePrice }: { basePrice: number }) {
           >
             <img
               src={watchSilver}
-              alt="ChronoCraft watch"
+              alt="Horologie watch"
               width={1280}
               height={1280}
               className="relative z-10 w-full max-w-md mx-auto rounded-sm"
@@ -176,7 +176,7 @@ function Craft() {
           Built for <em className="italic text-ember">generations</em>.
         </h2>
         <p className="mt-5 text-cream/70 max-w-md">
-          Every ChronoCraft passes through eleven pairs of hands. We assemble each movement, polish each lug, and sign the case-back before it leaves the atelier.
+          Every Horologie passes through eleven pairs of hands. We assemble each movement, polish each lug, and sign the case-back before it leaves the atelier.
         </p>
         <div className="mt-10 grid grid-cols-2 gap-px bg-white/5">
           {items.map((i) => (
@@ -275,7 +275,7 @@ function Cta() {
         href="#configure"
         className="inline-flex items-center gap-3 mt-10 bg-cream text-ink font-mono text-sm uppercase tracking-[0.25em] px-8 py-5 hover:bg-ember transition-colors"
       >
-        Configure your ChronoCraft →
+        Configure your Horologie →
       </a>
     </section>
   );

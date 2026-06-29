@@ -39,7 +39,7 @@ export function WatchPreview({
           <motion.img
             key={img}
             src={img}
-            alt={`ChronoCraft watch with ${caseFinishName ?? ""} case`}
+            alt={`Horologie watch with ${caseFinishName ?? ""} case`}
             width={1280}
             height={1280}
             initial={{ opacity: 0, scale: 1.04 }}
