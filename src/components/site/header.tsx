@@ -19,9 +19,9 @@ export function SiteHeader() {
           ChronoCraft<span className="text-ember">™</span>
         </Link>
         <nav className="hidden md:flex items-center gap-8 font-mono text-[11px] uppercase tracking-[0.22em] text-cream/70">
-          <Link to="/" hash="craft" className="hover:text-cream transition">Craft</Link>
-          <Link to="/" hash="reviews" className="hover:text-cream transition">Reviews</Link>
-          <Link to="/" hash="faq" className="hover:text-cream transition">FAQ</Link>
+          <a href="/#craft" className="hover:text-cream transition">Craft</a>
+          <a href="/#reviews" className="hover:text-cream transition">Reviews</a>
+          <a href="/#faq" className="hover:text-cream transition">FAQ</a>
           {user ? (
             <Link to="/orders" className="hover:text-cream transition">My Orders</Link>
           ) : null}
@@ -39,12 +39,12 @@ export function SiteHeader() {
               Sign in
             </Link>
           )}
-          <Link
-            to="/configure"
+          <a
+            href="/#configure"
             className="group relative font-mono text-[11px] uppercase tracking-[0.22em] bg-ember text-ink px-4 py-2.5 hover:bg-cream transition-colors"
           >
             Configure →
-          </Link>
+          </a>
         </div>
       </div>
     </header>
