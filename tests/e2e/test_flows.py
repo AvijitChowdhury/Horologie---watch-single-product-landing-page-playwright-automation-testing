@@ -119,7 +119,8 @@ def test_checkout_and_order(page: Page):
     page.get_by_role("button", name=re.compile("Place mock order")).click()
     page.wait_for_url("**/orders/**", timeout=20000)
     _shot(page, "09_order_confirmation")
-    expect(page).to_have_url(lambda url: "/orders/" in url)
+    import re as _re
+    expect(page).to_have_url(_re.compile(r"/orders/"))
 
 
 @allure.feature("Orders")
