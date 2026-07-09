@@ -99,6 +99,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Horologie — Custom Luxury Watches, Hand-Assembled" },
       { name: "twitter:description", content: "Design your own Horologie timepiece. Swiss movement, sapphire glass, and 25 characters of engraving — configured live, made to order." },
+      { name: "google-site-verification", content: "5YcbUyZnzsWhtkOg8LFf5jco0jqwxMqUl49bZgIu52I" },
     ],
     links: [
       {
