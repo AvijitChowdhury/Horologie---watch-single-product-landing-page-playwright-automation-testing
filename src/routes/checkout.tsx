@@ -13,7 +13,17 @@ import { toast } from "sonner";
 const catalogQuery = queryOptions({ queryKey: ["catalog"], queryFn: () => getCatalog() });
 
 export const Route = createFileRoute("/checkout")({
-  head: () => ({ meta: [{ title: "Review & Checkout · Horologie" }] }),
+  head: () => ({
+    meta: [
+      { title: "Review & Checkout · Horologie" },
+      { name: "description", content: "Review your Horologie configuration and place your made-to-order request." },
+      { property: "og:title", content: "Review & Checkout · Horologie" },
+      { property: "og:description", content: "Review your custom Horologie and place your order." },
+      { property: "og:url", content: "https://chronocraftavijit.lovable.app/checkout" },
+      { name: "robots", content: "noindex" },
+    ],
+    links: [{ rel: "canonical", href: "https://chronocraftavijit.lovable.app/checkout" }],
+  }),
   loader: ({ context }) => context.queryClient.ensureQueryData(catalogQuery),
   component: CheckoutPage,
 });

@@ -8,7 +8,17 @@ import { SiteFooter } from "@/components/site/footer";
 import { formatPrice } from "@/lib/format";
 
 export const Route = createFileRoute("/orders/")({
-  head: () => ({ meta: [{ title: "My Orders · Horologie" }] }),
+  head: () => ({
+    meta: [
+      { title: "My Orders · Horologie" },
+      { name: "description", content: "Your Horologie order history and production status." },
+      { property: "og:title", content: "My Orders · Horologie" },
+      { property: "og:description", content: "Track your Horologie atelier orders." },
+      { property: "og:url", content: "https://chronocraftavijit.lovable.app/orders" },
+      { name: "robots", content: "noindex" },
+    ],
+    links: [{ rel: "canonical", href: "https://chronocraftavijit.lovable.app/orders" }],
+  }),
   component: OrdersIndex,
 });
 

@@ -1,0 +1,9 @@
+# Horologie
+
+> Horologie is a single-product luxury watch atelier. Customers configure a hand-assembled Swiss timepiece — strap, dial, case finish, size, engraving, and warranty — with live pricing and preview, then place a made-to-order request.
+
+Horologie ships one flagship timepiece, built to each customer's specification. Every watch is hand-assembled with a Swiss automatic movement, sapphire crystal, and 316L stainless case. Delivery is 7–10 days, worldwide.
+
+## Pages
+
+- [Home & Configurator](/): Product story, live watch configurator, craftsmanship notes, owner reviews, and FAQ.

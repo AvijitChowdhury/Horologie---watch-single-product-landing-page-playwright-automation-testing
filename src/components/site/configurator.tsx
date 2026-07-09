@@ -130,6 +130,7 @@ export function Configurator({ catalog }: Props) {
           <h3 className="font-display text-3xl mt-1 mb-4">Make it yours.</h3>
           <input
             type="text"
+            aria-label="Engraving text"
             maxLength={25}
             value={cfg.engravingText}
             onChange={(e) => cfg.set({ engravingText: e.target.value })}

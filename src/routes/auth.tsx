@@ -7,7 +7,17 @@ import { SiteFooter } from "@/components/site/footer";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/auth")({
-  head: () => ({ meta: [{ title: "Sign in · Horologie" }] }),
+  head: () => ({
+    meta: [
+      { title: "Sign in · Horologie" },
+      { name: "description", content: "Sign in to your Horologie atelier account to configure and track your custom timepiece." },
+      { property: "og:title", content: "Sign in · Horologie" },
+      { property: "og:description", content: "Access your Horologie atelier account." },
+      { property: "og:url", content: "https://chronocraftavijit.lovable.app/auth" },
+      { name: "robots", content: "noindex" },
+    ],
+    links: [{ rel: "canonical", href: "https://chronocraftavijit.lovable.app/auth" }],
+  }),
   component: AuthPage,
 });
 
