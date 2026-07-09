@@ -115,7 +115,8 @@ def test_checkout_and_order(page: Page):
     page.get_by_label("Postal code").fill("8001")
     page.get_by_label("Country").fill("Switzerland")
     _shot(page, "08_checkout_filled")
-    page.get_by_role("button", name=lambda n: "Place mock order" in (n or "")).click()
+    import re
+    page.get_by_role("button", name=re.compile("Place mock order")).click()
     page.wait_for_url("**/orders/**", timeout=20000)
     _shot(page, "09_order_confirmation")
     expect(page).to_have_url(lambda url: "/orders/" in url)
