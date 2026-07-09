@@ -156,6 +156,31 @@ tests/e2e/
 └── test_flows.py        # Six Allure-annotated tests
 ```
 
+### Testing architecture
+
+```mermaid
+flowchart TB
+    Dev["Developer / CI"] -->|"pytest tests/e2e"| PT["pytest runner"]
+    PT --> CF["conftest.py<br/>Playwright fixtures<br/>viewport 1280×1800"]
+    PT --> TF["test_flows.py<br/>6 Allure-annotated tests"]
+
+    subgraph Bootstrap["Session bootstrap (no OAuth screen)"]
+        REST["Supabase REST<br/>/auth/v1/token"]
+        LS["localStorage<br/>sb-*-auth-token"]
+        REST --> LS
+    end
+
+    TF --> Bootstrap
+    TF -->|"drives"| Browser["Chromium (Playwright)"]
+    Browser -->|"http://localhost:8080"| App["Horologie app<br/>(TanStack Start)"]
+    App --> PG[("Postgres · RLS")]
+
+    TF -->|"page.screenshot"| Shots["tests/e2e/screenshots/*.png"]
+    TF -->|"allure.attach"| Raw["allure-results/*.json"]
+    Shots --> Raw
+    Raw -->|"allure generate"| Report["allure-report/<br/>Overview · Suites · Behaviors<br/>Graphs · Timeline · Categories"]
+```
+
 ### Coverage
 
 | # | Feature       | Scenario                                                            |
