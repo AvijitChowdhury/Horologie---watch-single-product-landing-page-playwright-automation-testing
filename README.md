@@ -161,8 +161,13 @@ allure generate allure-results -o allure-report --clean
 allure open allure-report
 ```
 
-### Result: 6 / 6 passing
+### Latest run — 6 / 6 passing (100%)
 
+> Duration `22s`, executed against the live preview with a real Supabase-authenticated
+> session. Every feature — landing, configurator, auth, checkout, orders, admin — is
+> exercised end-to-end.
+
+#### Overview
 ![Allure overview](tests/e2e/allure-screenshots/allure_overview.png)
 
 #### Suites
