@@ -1,0 +1,7 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","2166","Homepage loads with hero, configurator, testimonials and FAQ","tests.e2e","2026-07-09","passed","2026-07-09","","test_flows","",""
+"","1033","User can customize strap, dial, case, size, engraving, warranty and gift box","tests.e2e","2026-07-09","passed","2026-07-09","","test_flows","",""
+"","4253","Signed-in user can review and place a mock order","tests.e2e","2026-07-09","passed","2026-07-09","","test_flows","",""
+"","4880","User can view their order history","tests.e2e","2026-07-09","passed","2026-07-09","","test_flows","",""
+"","3804","Admin can sign in with email and password","tests.e2e","2026-07-09","passed","2026-07-09","","test_flows","",""
+"","4774","Admin dashboard lists all orders","tests.e2e","2026-07-09","passed","2026-07-09","","test_flows","",""
