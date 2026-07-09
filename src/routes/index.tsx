@@ -35,6 +35,7 @@ export const Route = createFileRoute("/")({
         { property: "og:type", content: "website" },
       ],
       links: [{ rel: "canonical", href: url }],
+      // Note: preload of hero image handled via <link rel="preload" as="image"> below
       scripts: [
         {
           type: "application/ld+json",
@@ -192,6 +193,8 @@ function Hero({ basePrice }: { basePrice: number }) {
               alt="Horologie watch"
               width={1280}
               height={1280}
+              fetchPriority="high"
+              decoding="async"
               className="relative z-10 w-full max-w-md mx-auto rounded-sm"
             />
           </motion.div>
