@@ -87,20 +87,40 @@ is gated by a security-definer `is_admin()` function so the check never runs cli
 
 ## Architecture
 
-```
-┌──────────────────────────┐        ┌───────────────────────────────┐
-│  React 19 + TanStack     │        │  TanStack Start server layer  │
-│  Router / Query          │──RPC──▶│  createServerFn handlers      │
-│  Zustand store           │        │  Zod input validation         │
-│  Framer Motion           │        │  Auth middleware (Supabase)   │
-└──────────┬───────────────┘        └──────────────┬────────────────┘
-           │ Publishable key                        │ Publishable + bearer
-           ▼                                        ▼
-     Supabase Auth  ◀──── Google OAuth ────▶  Postgres (RLS)
-                                                │
-                                                └── products, straps, dials,
-                                                    orders, order_configurations,
-                                                    profiles, testimonials, faq
+### System architecture
+
+```mermaid
+flowchart LR
+    subgraph Client["Browser · React 19"]
+        UI["Routes & Components<br/>TanStack Router"]
+        Store["Zustand configurator store<br/>(persisted)"]
+        Query["TanStack Query cache"]
+        Motion["Framer Motion"]
+        UI --> Store
+        UI --> Query
+        UI --> Motion
+    end
+
+    subgraph Server["TanStack Start runtime (Edge)"]
+        SFN["createServerFn handlers<br/>Zod input validation"]
+        MW["Supabase auth middleware<br/>(bearer attach)"]
+        SFN --> MW
+    end
+
+    subgraph Cloud["Lovable Cloud"]
+        Auth["Supabase Auth"]
+        OAuth["Managed Google OAuth broker"]
+        DB[("Postgres · RLS<br/>products · straps · dials<br/>orders · order_configurations<br/>profiles · testimonials · faq")]
+        Storage["Storage buckets"]
+    end
+
+    UI -- "RPC (createServerFn)" --> SFN
+    UI -- "Auth session<br/>(publishable key)" --> Auth
+    UI -- "signInWithOAuth" --> OAuth
+    OAuth --> Auth
+    MW -- "bearer + RLS as user" --> DB
+    SFN -. "admin only (dynamic import)" .-> DB
+    Auth --> DB
 ```
 
 ### Data model highlights
@@ -134,6 +154,31 @@ Google OAuth screen.
 tests/e2e/
 ├── conftest.py          # Playwright + viewport fixtures
 └── test_flows.py        # Six Allure-annotated tests
+```
+
+### Testing architecture
+
+```mermaid
+flowchart TB
+    Dev["Developer / CI"] -->|"pytest tests/e2e"| PT["pytest runner"]
+    PT --> CF["conftest.py<br/>Playwright fixtures<br/>viewport 1280×1800"]
+    PT --> TF["test_flows.py<br/>6 Allure-annotated tests"]
+
+    subgraph Bootstrap["Session bootstrap (no OAuth screen)"]
+        REST["Supabase REST<br/>/auth/v1/token"]
+        LS["localStorage<br/>sb-*-auth-token"]
+        REST --> LS
+    end
+
+    TF --> Bootstrap
+    TF -->|"drives"| Browser["Chromium (Playwright)"]
+    Browser -->|"http://localhost:8080"| App["Horologie app<br/>(TanStack Start)"]
+    App --> PG[("Postgres · RLS")]
+
+    TF -->|"page.screenshot"| Shots["tests/e2e/screenshots/*.png"]
+    TF -->|"allure.attach"| Raw["allure-results/*.json"]
+    Shots --> Raw
+    Raw -->|"allure generate"| Report["allure-report/<br/>Overview · Suites · Behaviors<br/>Graphs · Timeline · Categories"]
 ```
 
 ### Coverage
