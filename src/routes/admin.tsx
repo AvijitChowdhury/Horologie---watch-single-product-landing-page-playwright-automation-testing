@@ -8,7 +8,15 @@ import { SiteFooter } from "@/components/site/footer";
 import { formatPrice } from "@/lib/format";
 
 export const Route = createFileRoute("/admin")({
-  head: () => ({ meta: [{ title: "Admin · Horologie" }] }),
+  head: () => ({
+    meta: [
+      { title: "Admin · Horologie" },
+      { name: "description", content: "Horologie atelier admin dashboard." },
+      { name: "robots", content: "noindex, nofollow" },
+      { property: "og:url", content: "https://chronocraftavijit.lovable.app/admin" },
+    ],
+    links: [{ rel: "canonical", href: "https://chronocraftavijit.lovable.app/admin" }],
+  }),
   component: AdminPage,
 });
 

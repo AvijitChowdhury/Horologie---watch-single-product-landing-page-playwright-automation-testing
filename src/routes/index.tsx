@@ -16,14 +16,67 @@ const catalogQuery = queryOptions({
 });
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Horologie — Design Your Own Luxury Watch" },
-      { name: "description", content: "Configure a one-of-a-kind Horologie timepiece. Swiss movement, sapphire glass, 25 characters of engraving — yours, made to order." },
-      { property: "og:title", content: "Horologie — Design Your Own Luxury Watch" },
-      { property: "og:description", content: "Hand-assembled Swiss movement. Live configurator. Made to order in 7–10 days." },
-    ],
-  }),
+  head: ({ loaderData }) => {
+    const url = "https://chronocraftavijit.lovable.app/";
+    const product = loaderData?.product;
+    const testimonials = loaderData?.testimonials ?? [];
+    const faq = loaderData?.faq ?? [];
+    const ratingAvg =
+      testimonials.length > 0
+        ? (testimonials.reduce((s, t) => s + (t.rating ?? 0), 0) / testimonials.length).toFixed(1)
+        : null;
+    return {
+      meta: [
+        { title: "Horologie — Design Your Own Luxury Watch" },
+        { name: "description", content: "Configure a one-of-a-kind Horologie timepiece. Swiss movement, sapphire glass, 25 characters of engraving — yours, made to order." },
+        { property: "og:title", content: "Horologie — Design Your Own Luxury Watch" },
+        { property: "og:description", content: "Hand-assembled Swiss movement. Live configurator. Made to order in 7–10 days." },
+        { property: "og:url", content: url },
+        { property: "og:type", content: "website" },
+      ],
+      links: [{ rel: "canonical", href: url }],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Product",
+            name: product?.name ?? "Horologie Custom Timepiece",
+            description: product?.description ?? "Hand-assembled Swiss luxury watch, configured to order.",
+            brand: { "@type": "Brand", name: "Horologie" },
+            offers: {
+              "@type": "Offer",
+              priceCurrency: "USD",
+              price: product?.base_price ?? 0,
+              availability: "https://schema.org/InStock",
+              url,
+            },
+            ...(ratingAvg && testimonials.length > 0
+              ? {
+                  aggregateRating: {
+                    "@type": "AggregateRating",
+                    ratingValue: ratingAvg,
+                    reviewCount: testimonials.length,
+                  },
+                }
+              : {}),
+          }),
+        },
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: faq.map((f) => ({
+              "@type": "Question",
+              name: f.question,
+              acceptedAnswer: { "@type": "Answer", text: f.answer },
+            })),
+          }),
+        },
+      ],
+    };
+  },
   loader: ({ context }) => context.queryClient.ensureQueryData(catalogQuery),
   component: Landing,
   errorComponent: ({ error }) => (
@@ -42,6 +95,7 @@ function Landing() {
   return (
     <div className="min-h-screen bg-ink text-cream">
       <SiteHeader />
+      <main>
       <Hero basePrice={catalog.product.base_price} />
       <Marquee
         items={[
@@ -70,6 +124,7 @@ function Landing() {
       <Reviews testimonials={catalog.testimonials} />
       <Faq faq={catalog.faq} />
       <Cta />
+      </main>
       <SiteFooter />
     </div>
   );
