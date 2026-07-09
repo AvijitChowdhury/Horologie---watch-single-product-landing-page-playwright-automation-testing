@@ -34,8 +34,10 @@ export const Route = createFileRoute("/")({
         { property: "og:url", content: url },
         { property: "og:type", content: "website" },
       ],
-      links: [{ rel: "canonical", href: url }],
-      // Note: preload of hero image handled via <link rel="preload" as="image"> below
+      links: [
+        { rel: "canonical", href: url },
+        { rel: "preload", as: "image", href: watchSilver, fetchpriority: "high" },
+      ],
       scripts: [
         {
           type: "application/ld+json",
