@@ -87,20 +87,40 @@ is gated by a security-definer `is_admin()` function so the check never runs cli
 
 ## Architecture
 
-```
-┌──────────────────────────┐        ┌───────────────────────────────┐
-│  React 19 + TanStack     │        │  TanStack Start server layer  │
-│  Router / Query          │──RPC──▶│  createServerFn handlers      │
-│  Zustand store           │        │  Zod input validation         │
-│  Framer Motion           │        │  Auth middleware (Supabase)   │
-└──────────┬───────────────┘        └──────────────┬────────────────┘
-           │ Publishable key                        │ Publishable + bearer
-           ▼                                        ▼
-     Supabase Auth  ◀──── Google OAuth ────▶  Postgres (RLS)
-                                                │
-                                                └── products, straps, dials,
-                                                    orders, order_configurations,
-                                                    profiles, testimonials, faq
+### System architecture
+
+```mermaid
+flowchart LR
+    subgraph Client["Browser · React 19"]
+        UI["Routes & Components<br/>TanStack Router"]
+        Store["Zustand configurator store<br/>(persisted)"]
+        Query["TanStack Query cache"]
+        Motion["Framer Motion"]
+        UI --> Store
+        UI --> Query
+        UI --> Motion
+    end
+
+    subgraph Server["TanStack Start runtime (Edge)"]
+        SFN["createServerFn handlers<br/>Zod input validation"]
+        MW["Supabase auth middleware<br/>(bearer attach)"]
+        SFN --> MW
+    end
+
+    subgraph Cloud["Lovable Cloud"]
+        Auth["Supabase Auth"]
+        OAuth["Managed Google OAuth broker"]
+        DB[("Postgres · RLS<br/>products · straps · dials<br/>orders · order_configurations<br/>profiles · testimonials · faq")]
+        Storage["Storage buckets"]
+    end
+
+    UI -- "RPC (createServerFn)" --> SFN
+    UI -- "Auth session<br/>(publishable key)" --> Auth
+    UI -- "signInWithOAuth" --> OAuth
+    OAuth --> Auth
+    MW -- "bearer + RLS as user" --> DB
+    SFN -. "admin only (dynamic import)" .-> DB
+    Auth --> DB
 ```
 
 ### Data model highlights
