@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
-import { getCatalog } from "@/lib/catalog.functions";
+import { getCatalog, type CatalogPayload } from "@/lib/catalog.functions";
 import { SiteHeader } from "@/components/site/header";
 import { SiteFooter } from "@/components/site/footer";
 import { Marquee } from "@/components/site/marquee";
@@ -16,7 +16,7 @@ const catalogQuery = queryOptions({
 });
 
 export const Route = createFileRoute("/")({
-  head: ({ loaderData }) => {
+  head: ({ loaderData }: { loaderData?: CatalogPayload }) => {
     const url = "https://chronocraftavijit.lovable.app/";
     const product = loaderData?.product;
     const testimonials = loaderData?.testimonials ?? [];
